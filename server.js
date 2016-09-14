@@ -7,7 +7,8 @@ const dns = require('dns'),
           "ttl" : 300,
           "cachesize" : 1000
           });
-const morgan = require('morgan')
+const morgan = require('morgan');
+const validator = require('validator');
 
 // Constants
 const PORT = 8080;
@@ -22,29 +23,33 @@ app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method http://:req[ho
 
 app.use(function (req, res) {
   var location = '';
-  dns.resolveTxt(req.hostname, function(err, rec) {
-      if (err) {
-        console.log('Error in resolve\n');
-        var rec = '';
-      }
-      if (rec.toString().indexOf('redirect=')>-1) {
-        // Redirect exists for this domain
-        rec.forEach(function(a) {
-          var arr = a.toString().split("=");
-          if (arr[0]=="redirect") {
-            location=a.toString().replace(/^redirect=/,'');
-            res.redirect(301, location);
-          }
-        });
-      } else {
-        var arr = req.hostname.split(".")
-        if (arr[0]=="www") {
-          res.sendFile(__dirname + '/index.html');
-        } else {
-          res.redirect(301, req.protocol + '://www.' + req.hostname + req.path);
+  if (validator.isIP(req.hostname)==true) {
+    res.sendFile(__dirname + '/redirector.html');
+  } else {
+    dns.resolveTxt(req.hostname, function(err, rec) {
+        if (err) {
+          console.log('Error in resolve\n');
+          var rec = '';
         }
-      }
-  });
+        if (rec.toString().indexOf('redirect=')>-1) {
+          // Redirect exists for this domain
+          rec.forEach(function(a) {
+            var arr = a.toString().split("=");
+            if (arr[0]=="redirect") {
+              location=a.toString().replace(/^redirect=/,'');
+              res.redirect(301, location);
+            }
+          });
+        } else {
+          var arr = req.hostname.split(".")
+          if (arr[0]=="www") {
+            res.sendFile(__dirname + '/index.html');
+          } else {
+            res.redirect(301, req.protocol + '://www.' + req.hostname + req.path);
+          }
+        }
+    });
+  }
 });
 
 app.listen(PORT);
