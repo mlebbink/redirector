@@ -1,0 +1,64 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,dfn,th,var{font-style:normal;font-weight:normal;}li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}
+
+html,body{
+height: 100%;
+}
+
+body{
+margin:0;
+padding:0;
+background: #fafafa url(../static/bg.png) left top repeat-x;
+font-family:"Helvetica Neue",Helvetica, Arial;
+}
+
+div#block{
+visibility: hidden;
+width: 100%;
+height: 50%;
+margin-top: -200px;
+float: left;
+}
+
+div#content {
+width: 940px;
+height: 304px;
+margin: 0 auto;
+clear: both;
+position: relative;
+top: -152px;
+}
+
+div#logo{
+width: 715px;
+padding-left: 120px;
+margin: 0 auto;
+height: 110px;
+margin-bottom: 20px;
+background: url(../static/divider.png) bottom left no-repeat;
+}
+
+p.info{
+font-size: 20px;
+color: #9f9f9f;
+text-align: center;
+margin: 0 0 30px 0;
+padding: 0;
+}
+
+p.copy{
+font-size: 12px;
+color: #9f9f9f;
+text-align: center;
+margin: 0 0 30px 0;
+padding: 0;
+}
+
+a{
+	text-decoration: underline;
+	color: #9f9f9f;
+	
+}
+a:hover{
+	text-decoration: underline;
+    outline: none;
+}
