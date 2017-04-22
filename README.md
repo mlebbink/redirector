@@ -13,7 +13,7 @@ For redirecting to another location create a TXT record in dns in the following 
 <domain-name> IN TXT "redirect=http://www.anotherdomain.com/landingpage"
 ```
 
-Redirecting based on the TXT record is depended on the domainname, so you can redirect www.somedomain.tld to another location then second.somedomain.tld. 
+Redirecting based on the TXT record is depended on the domainname, so you can redirect www.somedomain.tld to another location than second.somedomain.tld. 
 Simply by making seperate TXT records for the two domainnames like.
 
 ```
